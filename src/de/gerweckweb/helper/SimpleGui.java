@@ -13,27 +13,32 @@ import java.awt.event.ActionListener;
  *
  * Einfache Gui zur Erweiterung des TestKlasse mit GuiFunktionalität
  */
+@SuppressWarnings("ALL")
 public class SimpleGui extends JFrame implements ActionListener{
-    JTextField text;
-    JLabel label;
-    JButton button;
+    JTextField jtfTextEntry;
+    JLabel jlControlOutput;
+    JButton jbtnDoButton;
 
     SimpleGui(String title){
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        text = new JTextField(10);
-        label = new JLabel("");
-        button = new JButton("DO!");
+        jtfTextEntry = new JTextField(10);
+        jlControlOutput = new JLabel("");
+        jbtnDoButton = new JButton("DO!");
         setLayout(new FlowLayout());
-        add(text);
-        add(label);
-        add(button);
-        button.addActionListener((ActionListener) this);
-        button.setActionCommand("DO");
+        add(jtfTextEntry);
+        add(jlControlOutput);
+        add(jbtnDoButton);
+        setSize(100,100);
+        setVisible(true);
+        jbtnDoButton.addActionListener((ActionListener) this);
+        jbtnDoButton.setActionCommand("DO");
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        Keyboard.guiReadInt(text,2,3);
-        label.setText(text.getText());
+        //Keyboard.guiReadInt(text,2,3);
+        Keyboard.readDoubleFromGui(jtfTextEntry,1,11);
+        jlControlOutput.setText(String.valueOf(Keyboard.readDoubleFromGui(jtfTextEntry)));
     }
 }
